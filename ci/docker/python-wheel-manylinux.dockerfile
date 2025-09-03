@@ -26,7 +26,7 @@ ENV LINUX_WHEEL_KIND='manylinux'
 ENV LINUX_WHEEL_VERSION=${manylinux}
 
 # Install basic dependencies
-RUN dnf install -y git flex curl autoconf zip perl-IPC-Cmd wget perl
+RUN dnf install -y git flex curl autoconf zip perl-IPC-Cmd wget perl ccache
 
 # A system Python is required for Ninja and vcpkg in this Dockerfile.
 # On manylinux_2_28 base images, no system Python is installed.
@@ -46,9 +46,9 @@ COPY ci/scripts/install_ninja.sh arrow/ci/scripts/
 RUN /arrow/ci/scripts/install_ninja.sh ${ninja} /usr/local
 
 # Install ccache
-ARG ccache=4.1
-COPY ci/scripts/install_ccache.sh arrow/ci/scripts/
-RUN /arrow/ci/scripts/install_ccache.sh ${ccache} /usr/local
+#ARG ccache=4.1
+#COPY ci/scripts/install_ccache.sh arrow/ci/scripts/
+#RUN /arrow/ci/scripts/install_ccache.sh ${ccache} /usr/local
 
 # Install vcpkg
 ARG vcpkg
