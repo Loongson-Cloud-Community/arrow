@@ -26,7 +26,7 @@ ENV LINUX_WHEEL_KIND='manylinux'
 ENV LINUX_WHEEL_VERSION=${manylinux}
 
 # Install basic dependencies
-RUN dnf install -y git flex curl autoconf zip perl-IPC-Cmd wget
+RUN dnf install -y git flex curl autoconf zip perl-IPC-Cmd wget perl
 
 # A system Python is required for Ninja and vcpkg in this Dockerfile.
 # On manylinux_2_28 base images, no system Python is installed.
@@ -36,9 +36,9 @@ ENV CPYTHON_VERSION=cp39
 ENV PATH=/opt/python/${CPYTHON_VERSION}-${CPYTHON_VERSION}/bin:${PATH}
 
 # Install CMake
-ARG cmake=3.29.2
-COPY ci/scripts/install_cmake.sh arrow/ci/scripts/
-RUN /arrow/ci/scripts/install_cmake.sh ${cmake} /usr/local
+#ARG cmake=3.29.2
+#COPY ci/scripts/install_cmake.sh arrow/ci/scripts/
+#RUN /arrow/ci/scripts/install_cmake.sh ${cmake} /usr/local
 
 # Install Ninja
 ARG ninja=1.10.2
@@ -100,6 +100,8 @@ RUN --mount=type=secret,id=github_repository_owner \
 # Make sure auditwheel is up-to-date
 # Force upgrade version to 6.4.0 or later to ensure platform tags order is correct
 # See https://github.com/apache/arrow/pull/46705
+ARG loongarch_pip_url=https://lpypi.loongnix.cn/loongson/pypi/+simple
+ENV PIP_INDEX_URL=${loongarch_pip_url}
 RUN pipx upgrade auditwheel>=6.4.0
 
 # Configure Python for applications running in the bash shell of this Dockerfile
