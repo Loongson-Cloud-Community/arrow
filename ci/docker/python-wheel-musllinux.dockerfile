@@ -76,13 +76,13 @@ ENV CMAKE_BUILD_TYPE=${build_type} \
 # where we would need to fall back to 1.8.186 but we cannot patch
 # those portfiles since vcpkg-tool handles the checkout of previous
 # versions => use bundled S3 build
-RUN --mount=type=secret,id=github_repository_owner \
-    --mount=type=secret,id=github_token \
-    --mount=type=secret,id=vcpkg_binary_sources \
-      export GITHUB_REPOSITORY_OWNER=$(cat /run/secrets/github_repository_owner); \
-      export GITHUB_TOKEN=$(cat /run/secrets/github_token); \
-      export VCPKG_BINARY_SOURCES=$(cat /run/secrets/vcpkg_binary_sources); \
-      arrow/ci/scripts/install_vcpkg.sh ${VCPKG_ROOT} ${vcpkg} && \
+#RUN --mount=type=secret,id=github_repository_owner \
+#    --mount=type=secret,id=github_token \
+#    --mount=type=secret,id=vcpkg_binary_sources \
+#      export GITHUB_REPOSITORY_OWNER=$(cat /run/secrets/github_repository_owner); \
+#      export GITHUB_TOKEN=$(cat /run/secrets/github_token); \
+#      export VCPKG_BINARY_SOURCES=$(cat /run/secrets/vcpkg_binary_sources); \
+RUN   arrow/ci/scripts/install_vcpkg.sh ${VCPKG_ROOT} ${vcpkg} && \
       vcpkg install \
         --clean-after-build \
         --x-install-root=${VCPKG_ROOT}/installed \
