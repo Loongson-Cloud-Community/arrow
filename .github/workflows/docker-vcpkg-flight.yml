@@ -1,4 +1,4 @@
-name: Build and Push vcpkg with azure flight image
+name: Build and Push vcpkg with flight image
 
 on:
   workflow_dispatch:
@@ -56,14 +56,14 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ci/docker/python-wheel-${{ env.platform }}-vcpkg-azure-flight.dockerfile
+          file: ci/docker/python-wheel-${{ env.platform }}-vcpkg-flight.dockerfile
           platforms: linux/loong64
           push: ${{ github.event.inputs.push }}
           build-args: |
-            base=ghcr.io/loongson-cloud-community/arrow-wheel-${{ env.platform }}-vcpkg-base:${{ env.tag }}
+            base=ghcr.io/loongson-cloud-community/arrow-wheel-${{ env.platform }}-vcpkg-azure:${{ env.tag }}
           tags: |
-            ghcr.io/loongson-cloud-community/arrow-wheel-${{ env.platform }}-vcpkg-azure-flight:latest
-            ghcr.io/loongson-cloud-community/arrow-wheel-${{ env.platform }}-vcpkg-azure-flight:${{ env.tag }}
+            ghcr.io/loongson-cloud-community/arrow-wheel-${{ env.platform }}-vcpkg-flight:latest
+            ghcr.io/loongson-cloud-community/arrow-wheel-${{ env.platform }}-vcpkg-flight:${{ env.tag }}
           outputs: type=image,oci-mediatypes=true,compression=zstd,compression-level=3,force-compression=true
           cache-from: type=gha
           cache-to: type=gha,mode=max
