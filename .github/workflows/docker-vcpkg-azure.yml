@@ -1,4 +1,4 @@
-name: Build and Push vcpkg with azure flight image
+name: Build and Push vcpkg with azure image
 
 on:
   workflow_dispatch:
