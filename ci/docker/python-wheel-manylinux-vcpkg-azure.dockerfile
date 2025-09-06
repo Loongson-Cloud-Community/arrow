@@ -14,7 +14,7 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-# ghcr.io/loongson-cloud-community/arrow-wheel-manylinux-vcpkg-azure-flight
+# ghcr.io/loongson-cloud-community/arrow-wheel-manylinux-vcpkg-azure
 
 ARG base
 FROM ${base}
@@ -24,7 +24,6 @@ RUN   vcpkg install \
         --clean-after-build \
         --x-install-root=${VCPKG_ROOT}/installed \
         --x-manifest-root=/arrow/ci/vcpkg \
-        --x-feature=azure \
-        --x-feature=flight && \
+        --x-feature=azure && \
       rm -rf ~/.config/NuGet/
 
