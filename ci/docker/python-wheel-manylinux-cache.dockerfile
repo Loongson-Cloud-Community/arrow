@@ -67,7 +67,7 @@ ENV CMAKE_BUILD_TYPE=${build_type} \
 # where we would need to fall back to 1.8.186 but we cannot patch
 # those portfiles since vcpkg-tool handles the checkout of previous
 # versions => use bundled S3 build
-RUN --mount=type=bind,source=/home/runner/.cache/vcpkg,target=/opt/vcpkg \
+RUN --mount=type=bind,source=.cache/vcpkg,target=/opt/vcpkg \
       arrow/ci/scripts/install_vcpkg.sh ${VCPKG_ROOT} ${vcpkg} && \
       vcpkg install \
         --clean-after-build \
