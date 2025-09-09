@@ -64,13 +64,13 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ci/docker/python-wheel-${{ env.platform }}.dockerfile
+          file: ci/docker/python-wheel-${{ env.platform }}-full.dockerfile
           platforms: linux/loong64
           push: ${{ github.event.inputs.push }}
           build-args: |
             arch=loongarch64
             arch_short=loong64
-            base=lcr.loongnix.cn/pypa/${{ matrix.platform_tag }}_loongarch64
+            base=ghcr.io/loongson-cloud-community/arrow-wheel-${{ env.platform }}-vcpkg-flight-dev
             manylinux=${{ env.manylinux }}
             python=${{ matrix.python.version }}
             python_abi_tag=${{ matrix.python.abi }}
