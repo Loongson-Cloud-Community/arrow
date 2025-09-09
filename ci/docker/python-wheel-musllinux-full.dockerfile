@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-ARG base
+ARG base=ghcr.io/loongson-cloud-community/arrow-wheel-musllinux-vcpkg-flight-dev
 FROM ${base}
 
 ARG loongarch_pip_url=https://lpypi.loongnix.cn/loongson/pypi/+simple
